@@ -1,0 +1,132 @@
+@font-face {
+	font-family: 'FuturaStd';
+	src: url('../fonts/FuturaStd-Bold.otf');
+	font-weight: bold;
+}
+
+@font-face {
+	font-family: 'NexaBold';
+	src: url('../fonts/nexa/Nexa Bold.ttf');
+}
+
+
+body,html{
+	height: 100%;
+	}
+body{
+	background: black;
+}
+/*.row{
+	display: none;
+}*/
+#screen1,#screen2{
+	/* display: initial; */
+}
+#screen2 h1.text{
+	font-size: 8vw;
+}
+h1.text{
+	color:white;
+	height: 100%;
+	font-family: 'FuturaStd';
+	display: table-cell;
+	margin: 0;
+	line-height: 1.3em;
+	background: black;
+	font-size: 9vw;
+	vertical-align: middle;
+}
+
+.container {
+	height: auto;
+	width: 100%;
+	margin-left: 50px;
+	padding-right:5px;
+}
+
+.row {
+	height: 100vh;
+}
+div.box:before {
+	/* content: ''; */
+	/* border: 1px solid white; */
+	display: inline-block;
+	height: 100%;
+}
+
+.box {
+	height: 100%;
+	padding-right: 30px;
+	display: table;
+}
+.logo{
+	position: fixed;
+	margin-left: 27px;
+	margin-top: 35px;
+	font-size: 15px;
+	font-family: 'NexaBold';
+}
+
+.logo a{
+	color: #3293DA;
+}
+.logo a:hover, .logo a:focus, .logo a:active{
+	text-decoration: none;
+	color: #3293DA
+}
+
+.scroll-screen span {
+	color: white;
+}
+
+div.scroll-screen {
+	position: fixed;
+	font-size: 5rem;
+	width: 100%;
+	bottom: 5px;
+	text-align: center;
+}
+
+.scroll-screen a:hover {
+	text-decoration: none;
+	color: white;
+}
+
+#scroll-screen-top{
+	display: none
+}
+
+a:hover,a:focus,a:active{
+	text-decoration: none;
+	color:initial;
+}
+
+#debug{
+	position: fixed;
+	bottom:100px;
+	width: 100%;
+	color:white;
+	background: red;
+	padding: 10px;
+}
+
+
+.hide{
+	display: none;
+}
+
+
+.extra{
+	padding: 50px;
+}
+@media screen and (max-width: 800px) {
+  .container {
+    margin-left:20px;
+  }
+}
+
+@media screen and (min-width: 500px) {
+  h1.text {
+    font-size: 5.5vw !important;
+  }
+}

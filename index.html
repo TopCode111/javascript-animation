@@ -54,6 +54,9 @@
         .lift {
             transform: translateY(5px);
         }
+        .hitbox{
+        	display: -webkit-inline-box;
+        }
     </style>
 </head>
 <body>
@@ -70,37 +73,37 @@
 		</div>
 		<div class="row" id="screen2">
 			<div class="box">
-				<h1 class="text">Currently<br>CEO & Co-Founder<br>of<a href="https://muze.tv/" target="_blank">
+				<h1 class="text">Currently<br>CEO & Co-Founder<br>of <div class="hitbox"><a href="https://muze.tv/" target="_blank">
 					<span style="color:#423EF9">Muze</span>
-				</a>
+				</a></div>
 			</h1>
 		</div>
 	</div>
 	<div class="row" id="screen3">
 		<div class="box">
 			<h1 class="text">Previously ran<br> Product for<br>	
-				<a href="https://www.beyonce.com/" target="_blank">
-					<span style="color:#E684BF">Beyoncé</span></a>,<a href="https://fancy.com/" target="_blank"><span style="color:#389DDF"> Fancy</span></a>,<br> and <a href="https://www.superphone.io/" target="_blank"><span style="color:#E0B850">SuperPhone</span></a>
+				<div class="hitbox"><a href="https://www.beyonce.com/" target="_blank">
+					<span style="color:#E684BF">Beyoncé</span></a>,<a href="https://fancy.com/" target="_blank"><span style="color:#389DDF"> Fancy</span></a>,<br> and <a href="https://www.superphone.io/" target="_blank"><span style="color:#E0B850">SuperPhone</span></a></div>
 				</h1>
 			</div>
 		</div>
 		<div class="row" id="screen4">
 			<div class="box">
 				<h1 class="text">Also tinker and<br>advise through<br>my studio<br> 
-					<a href="https://interludelabs.com/" target="_blank">
+					<div class="hitbox"><a href="https://interludelabs.com/" target="_blank">
 						<span style="color:#286BC3">Interlude Labs</span>
-					</a>
+					</a></div>
 				</h1>
 			</div>
 		</div>
 		<div class="row" id="screen5">
 			<div class="box">
-				<h1 class="text">Heavy in the<br><a href="https://photos.google.com/share/AF1QipN-J3KRCdleF7Fp2fj6fCxlnM1kMj-Y_YKDEdqCoUJsFAjiHqLLxuhxkZAdb7kmng?key=OS05ZVVQU3NvZDBNT1J5bjBxSTNGRFk0RzRaZ0ZB" target="_blank"><span style="color:#FFA981">Travel</span></a>, <a href="https://www.youtube.com/watch?v=TA04S4yOA_0" target="_blank"><span style="color:#84f210">Basketball</span></a><br>and Taco game</h1>
+				<h1 class="text">Heavy in the<br><div class="hitbox"><a href="https://photos.google.com/share/AF1QipN-J3KRCdleF7Fp2fj6fCxlnM1kMj-Y_YKDEdqCoUJsFAjiHqLLxuhxkZAdb7kmng?key=OS05ZVVQU3NvZDBNT1J5bjBxSTNGRFk0RzRaZ0ZB" target="_blank"><span style="color:#FFA981">Travel</span></a>, <a href="https://www.youtube.com/watch?v=TA04S4yOA_0" target="_blank"><span style="color:#84f210">Basketball,</span></a></div><br>and Taco game</h1>
 			</div>
 		</div>
 		<div class="row" id="screen6">
 			<div class="box">
-				<h1 class="text">My inbox is<br><a href="mailto:yo@dannyquick.nyc?subject=Hey what’s up?"><span style="color:#D46A77">always open</span></a></h1>
+				<h1 class="text">My inbox is <div class="hitbox"><br><a href="mailto:yo@dannyquick.nyc?subject=Hey what’s up?"><span style="color:#D46A77">always open</span></a></div></h1>
 			</div>
 		</div>
 	</div>
@@ -110,7 +113,7 @@
 	<div class="scroll-screen" id="scroll-screen-top">
 		<a href="#screen1"><span class="arrowu">&uarr;</span></a>
 	</div>
-    <!-- <div id="debug"></div> -->
+    <!--  <div id="debug"></div> -->
     <script>
         var arrowBounce = function() {
             var arrow = document.querySelector(".arrow");
@@ -136,12 +139,16 @@
 		tolerance = elemHeight/20;
 		isAnimating = false;
 		var lastScrollTop = 0;
+		$("#scroll-screen-bottom a").bind('click', function(){
 
+			//scrollFunction() ;
+		})
 		function scrollFunction() {
+			//alert("");
 			console.log("dimen"+ $(window).scrollTop());
 
 			if(!isAnimating){
-				$("#debug").html("height= "+elemHeight+", scroll= "+$(window).scrollTop());
+				//$("#debug").html("height= "+elemHeight+", scroll= "+$(window).scrollTop());
 				if($(window).scrollTop() > lastScrollTop){
 
 					console.log('scrolling down');
@@ -329,7 +336,7 @@ $('.container').on( 'mousewheel DOMMouseScroll touchmove', function (e) {
 	e.preventDefault();
 
 	console.log('scrolling');
-	$("#debug").html(number);
+	//$("#debug").html(number);
 	
 	if(!anim){
 
@@ -352,7 +359,7 @@ $('.container').on( 'mousewheel DOMMouseScroll touchmove', function (e) {
 //  this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
 });
 
-$("#scroll-screen-bottom a, .container").on('click', function(event){
+$("#scroll-screen-bottom a").on('click', function(event){
 	//dir = detectDirection();
 	console.log('click');
 	

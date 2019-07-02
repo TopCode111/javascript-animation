@@ -1,3 +1,62 @@
+body,html{  width: 100%;  height: 100%;}
+body {
+  background-color: #222;
+  padding: 0px;
+  margin: 0px;
+  overflow: hidden;
+}
+
+
+#nav{ position: relative; z-index:5000; text-align: center; }
+
+#Dots{ 
+  position: absolute; 
+  z-index:5000;
+  bottom:40px; left:50%;
+  -webkit-transform:translate(-50%,0%);
+  transform:translate(-50%,0%);    
+}
+
+.Dot{
+ width:8px; 
+ height: 8px; 
+ border-radius: 50%;
+ position: relative;
+ float: left; 
+ background-color: #fff;
+ opacity:1;
+ margin:5px; margin-bottom:0px;
+ cursor: pointer;
+ border:2px solid rgba(255,255,255,0.7);
+}
+
+
+.box {
+  width: 100vw;
+  height: 100vh;
+  background: transparent;
+}
+/* .slide h1 {
+  display:block;
+  position:absolute;
+  -webkit-transform:translate(-50%,-50%);
+          transform:translate(-50%,-50%);
+  left:50%; top:50%;
+} */
+
+a {
+	text-decoration: none;
+}
+
+
+
+#DiacoDesignLink,#pens{
+  color: #fff;
+}
+
+
+/* danny CSS */
+
 @font-face {
 	font-family: 'FuturaStd';
 	src: url('../fonts/FuturaStd-Bold.otf');
@@ -9,16 +68,28 @@
 	src: url('../fonts/nexa/Nexa Bold.ttf');
 }
 
-::-webkit-scrollbar{
-	display: none;
-}
 
 body,html{
-	height: 100%;
+	height: 600vh;
 	}
 body{
 	background: black;
+
 }
+
+::-webkit-scrollbar {display:none;}
+
+#screen1,#screen2,#screen13,#screen4,#screen5,#screen6 {
+	height: 100vh;
+	position: fixed;
+	top: 0;
+	left: 50px;
+}
+
+.triggers {
+	height: 100vh;
+}
+
 #screen2 h1.text{
 	font-size: 8vw;
 }
@@ -37,20 +108,18 @@ h1.text{
 .container {
 	height: auto;
 	width: 100%;
-	/* margin-left: 50px;
-	padding-right:5px; */
+	margin-left: 50px;
+	padding-right:5px;
 }
 
 .row {
 	height: 100vh;
-	margin-right: auto !important;
-	margin-left: auto !important;
+	width: 100vw;
 }
 
-.container .row .box h1{
-	/* transition: all 0.3s ease; */
+.hidden {
+	display: none;
 }
-
 div.box:before {
 	/* content: ''; */
 	/* border: 1px solid white; */
@@ -59,17 +128,16 @@ div.box:before {
 }
 
 .box {
-	height: 100%;
 	padding-right: 30px;
 	display: table;
 }
 .logo{
-	z-index: 10;
 	position: fixed;
 	margin-left: 27px;
 	margin-top: 50px;
 	font-size: 20px;
 	font-family: 'NexaBold';
+	z-index: 1;
 }
 
 .logo a{
@@ -126,7 +194,7 @@ a:hover,a:focus,a:active{
 }
 @media screen and (max-width: 800px) {
   .container {
-    /* margin-left:20px; */
+    margin-left:20px;
   }
 }
 
@@ -135,3 +203,4 @@ a:hover,a:focus,a:active{
     font-size: 5.5vw !important;
   }
 }
+

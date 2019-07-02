@@ -15,6 +15,7 @@ body,html{
 	}
 body{
 	background: black;
+	overflow: hidden;
 }
 /*.row{
 	display: none;
@@ -65,6 +66,7 @@ div.box:before {
 	margin-top: 50px;
 	font-size: 20px;
 	font-family: 'NexaBold';
+	z-index: 10;
 }
 
 .logo a{
@@ -118,6 +120,12 @@ a:hover,a:focus,a:active{
 
 .extra{
 	padding: 50px;
+}
+/*.showscreen {
+	display: none;
+}
+.showscreen.active{
+	*/display: block !important;
 }
 @media screen and (max-width: 800px) {
   .container {

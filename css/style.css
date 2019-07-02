@@ -9,19 +9,15 @@
 	src: url('../fonts/nexa/Nexa Bold.ttf');
 }
 
+::-webkit-scrollbar{
+	display: none;
+}
 
 body,html{
 	height: 100%;
 	}
 body{
 	background: black;
-	overflow: hidden;
-}
-/*.row{
-	display: none;
-}*/
-#screen1,#screen2{
-	/* display: initial; */
 }
 #screen2 h1.text{
 	font-size: 8vw;
@@ -41,13 +37,20 @@ h1.text{
 .container {
 	height: auto;
 	width: 100%;
-	margin-left: 50px;
-	padding-right:5px;
+	/* margin-left: 50px;
+	padding-right:5px; */
 }
 
 .row {
 	height: 100vh;
+	margin-right: auto !important;
+	margin-left: auto !important;
 }
+
+.container .row .box h1{
+	/* transition: all 0.3s ease; */
+}
+
 div.box:before {
 	/* content: ''; */
 	/* border: 1px solid white; */
@@ -61,12 +64,12 @@ div.box:before {
 	display: table;
 }
 .logo{
+	z-index: 10;
 	position: fixed;
 	margin-left: 27px;
 	margin-top: 50px;
 	font-size: 20px;
 	font-family: 'NexaBold';
-	z-index: 10;
 }
 
 .logo a{
@@ -121,15 +124,9 @@ a:hover,a:focus,a:active{
 .extra{
 	padding: 50px;
 }
-/*.showscreen {
-	display: none;
-}
-.showscreen.active{
-	*/display: block !important;
-}
 @media screen and (max-width: 800px) {
   .container {
-    margin-left:20px;
+    /* margin-left:20px; */
   }
 }
 

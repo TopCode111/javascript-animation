@@ -21,6 +21,6 @@ function GO(e){
 
 document.addEventListener("mousewheel",GO);
 document.addEventListener("DOMMouseScroll",GO);
-document.getElementById('nextBtn').addEventListener("click",function(){GO(-1)});
+/*document.getElementById('nextBtn').addEventListener("click",function(){GO(-1)});
 document.getElementById('prevtBtn').addEventListener("click",function(){GO(1)});
-
+*/

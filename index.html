@@ -1,95 +1,369 @@
+
 <!DOCTYPE html>
-<html lang="en" >
-
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Danny Quick</title>
-  
-  <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Oswald'>
-  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css'>
-  <!-- <link rel='stylesheet' href='css/xvrpee.css'> -->
-  <link rel="stylesheet" href="css/style.css">
+	<title></title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+	<link rel="stylesheet" href="css/jquery-ui.css">
+	
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/style.css">
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <style>
+        .d-flex {
+            display: flex;
+        }
+        .m-auto {
+            margin: auto;
+        }
+        .outer {
+            height: 120px;
+            width: 120px;
+            border-radius: 50%;
+            background: #123a7d;
+            position: absolute;
+            left: 50%;
+            bottom: 40px;
+        }
+
+        .arrow, .arrowu {
+            font-weight: bolder;
+            color: white;
+            white-space: nowrap;
+            font-size: 4rem;
+            position: absolute;
+            right: 0;
+            bottom: 30px;
+            left: 20px;
+            margin: auto;
+            width: 50px;
+            height: 50px;
+            transform: translateY(-5px);
+            -webkit-transition: all 800ms linear;
+            -moz-transition: all 900ms linear;
+            -ms-transition: all 900ms linear;
+            -o-transition: all 900ms linear;
+            transition: all 900ms linear;
+        }
+
+        /* this sets the position of the arrow when it's up, so it will move up or down by 14px when you add or remove this class */
+        .lift {
+            transform: translateY(5px);
+        }
+        .hitbox{
+        	display: -webkit-inline-box;
+        }
+    </style>
 </head>
-
 <body>
+	<header>
+		<div class="logo">
+			<p><a href="#screen1">Danny Quick</a></p>
+		</div>
+	</header>
+	<div class="container">
+		<div class="row" id="screen1">
+			<div class="box">
+				<h1 class="text">Culture X <br>Technology</h1>
+			</div>
+		</div>
+		<div class="row" id="screen2">
+			<div class="box">
+				<h1 class="text">Currently<br>CEO & Co-Founder<br>of <div class="hitbox"><a href="https://muze.tv/" target="_blank">
+					<span style="color:#423EF9">Muze</span>
+				</a></div>
+			</h1>
+		</div>
+	</div>
+	<div class="row" id="screen3">
+		<div class="box">
+			<h1 class="text">Previously ran<br> Product for<br>	
+				<div class="hitbox"><a href="https://www.beyonce.com/" target="_blank">
+					<span style="color:#E684BF">Beyoncé</span></a>,<a href="https://fancy.com/" target="_blank"><span style="color:#389DDF"> Fancy</span></a>,<br> and <a href="https://www.superphone.io/" target="_blank"><span style="color:#E0B850">SuperPhone</span></a></div>
+				</h1>
+			</div>
+		</div>
+		<div class="row" id="screen4">
+			<div class="box">
+				<h1 class="text">Also tinker and<br>advise through<br>my studio<br> 
+					<div class="hitbox"><a href="https://interludelabs.com/" target="_blank">
+						<span style="color:#286BC3">Interlude Labs</span>
+					</a></div>
+				</h1>
+			</div>
+		</div>
+		<div class="row" id="screen5">
+			<div class="box">
+				<h1 class="text">Heavy in the<br><div class="hitbox"><a href="https://photos.google.com/share/AF1QipN-J3KRCdleF7Fp2fj6fCxlnM1kMj-Y_YKDEdqCoUJsFAjiHqLLxuhxkZAdb7kmng?key=OS05ZVVQU3NvZDBNT1J5bjBxSTNGRFk0RzRaZ0ZB" target="_blank"><span style="color:#FFA981">Travel</span></a>, <a href="https://www.youtube.com/watch?v=TA04S4yOA_0" target="_blank"><span style="color:#84f210">Basketball,</span></a></div><br>and Taco game</h1>
+			</div>
+		</div>
+		<div class="row" id="screen6">
+			<div class="box">
+				<h1 class="text">My inbox is<br><a href="mailto:yo@dannyquick.nyc?subject=Hey what’s up?"><span style="color:#D46A77">always open</span></a></h1>
+			</div>
+		</div>
+	</div>
+	<div class="scroll-screen" id="scroll-screen-bottom">
+		<a href="#screen2"><span class="arrow">&darr;</span></a>
+	</div>
+	<div class="scroll-screen" id="scroll-screen-top">
+		<a href="#screen1"><span class="arrowu">&uarr;</span></a>
+	</div>
+    <!--  <div id="debug"></div> -->
+    <script>
+        var arrowBounce = function() {
+            var arrow = document.querySelector(".arrow");
+            var arrowu = document.querySelector(".arrowu");
+            toggleClass(arrow, 'lift');
+            toggleClass(arrowu, 'lift');
+        };
 
-<header>
-  <div class="logo">
-    <p><a href="#screen1">Danny Quick</a></p>
-  </div>
-</header>
+        const toggleClass = (el, className) => el.classList.toggle(className)
 
-<div class="container">
-  <div class="row box slide" id="screen1">
-    <div class="box">
-      <h1 class="text">Culture X <br>Technology</h1>
-    </div>
-  </div>
-  <div class="row box slide" id="screen2">
-    <h1 class="text">Currently<br>CEO & Co-Founder<br>of <a href="https://muze.tv/" target="_blank">
-      <span style="color:#423EF9">Muze</span></a>
-    </h1>
-  </div>
-  <div class="row box slide" id="screen3">
-    <h1 class="text">Previously ran<br> Product for<br>	
-      <a href="https://www.beyonce.com/" target="_blank">
-        <span style="color:#E684BF">Beyoncé</span></a>,<a href="https://fancy.com/" target="_blank"><span style="color:#389DDF"> Fancy</span></a>,<br> and <a href="https://www.superphone.io/" target="_blank"><span style="color:#E0B850">SuperPhone</span></a>
-    </h1>
-  </div>
-  <div class="row box slide" id="screen4">
-    <h1 class="text">Also tinker and<br>advise through<br>my studio<br> 
-      <a href="https://interludelabs.com/" target="_blank">
-        <span style="color:#286BC3">Interlude Labs</span>
-      </a>
-    </h1>
-  </div>
-  <div class="row box slide" id="screen5">
-    <h1 class="text">Heavy in the<br><a href="https://photos.google.com/share/AF1QipN-J3KRCdleF7Fp2fj6fCxlnM1kMj-Y_YKDEdqCoUJsFAjiHqLLxuhxkZAdb7kmng?key=OS05ZVVQU3NvZDBNT1J5bjBxSTNGRFk0RzRaZ0ZB" target="_blank"><span style="color:#FFA981">Travel</span></a>, <a href="https://www.youtube.com/watch?v=TA04S4yOA_0" target="_blank"><span style="color:#84f210">Basketball,</span></a><br> and Taco game</h1>
-  </div>
-  <div class="row box slide" id="screen6">
-    <h1 class="text">My inbox is<br><a href="mailto:yo@dannyquick.nyc?subject=Hey what’s up?"><span style="color:#D46A77">always open</span></a></h1>
-  </div>
-</div>
-<div class="scroll-screen" id="scroll-screen-bottom">
-  <a href="#screen2"><span class="arrow">&darr;</span></a>
-</div>
-<div class="scroll-screen" id="scroll-screen-top">
-  <a href="#screen1"><span class="arrowu">&uarr;</span></a>
-</div>
-<!-- <div id="nav">
-  <div id="prevtBtn" class='fa fa-chevron-circle-left'></div>
-  <div id="nextBtn" class='fa fa-chevron-circle-right'></div>
-</div> -->
-<div id="Dots" class="hidden"></div>
+        // run the arrowBounce function every 800ms
+        setInterval(arrowBounce, 450);
+    </script>
+		<script type="text/javascript">
+			$(document).ready(function(){
+				elemHeight = $('.box').height();
+				window.onscroll = function() {/*scrollFunction()*/};
+				elemHeight = $('.box').height();
+				tolerance = elemHeight/20;
+				isAnimating = false;
+				var lastScrollTop = 0;
+				$("#scroll-screen-bottom a").bind('click', function(){
+					//scrollFunction() ;
+				})
+				function scrollFunction() {
+					console.log("dimen"+ $(window).scrollTop());
 
-<script src='http://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.0/TweenMax.min.js'></script>
-<!-- <script src='js/xvrpee.js'></script> -->
-<script type="text/javascript">
-  
-    TweenLite.set('body',{perspective:700});
-  var slides=document.querySelectorAll('.slide'),tl=new TimelineLite({paused:true});
-  for(var i=0;i<slides.length;i++){
-      var D=document.createElement('div'); D.className='Dot'; D.id='Dot'+i;
-      D.addEventListener('click',function(){ tl.seek(this.id).pause() });
-      document.getElementById('Dots').appendChild(D);
-      if(i!=0){tl.addPause('Dot'+i)};
-      if(i!=slides.length-1){
-        tl.to(slides[i],0.5,{scale:.8,ease:Back.easeOut})
-          .to(slides[i],0.7,{xPercent:-100,rotationY:80},'L'+i) 
-          .from(slides[i+1],0.7,{xPercent:100,rotationY:-80},'L'+i)
-          .to('#Dot'+i,0.7,{backgroundColor:'rgba(255,255,255,0.2)'},'L'+i)
-          .from(slides[i+1],0.5,{scale:.8,ease:Back.easeIn})
-      };
-  };
-  function GO(e){
-    var SD=isNaN(e)?e.wheelDelta||-e.detail:e;
-    if(SD<0){tl.play()}else{tl.reverse()};
-  };
+					if(!isAnimating){
+						if($(window).scrollTop() > lastScrollTop){
 
-  document.addEventListener("mousewheel",GO);
-  document.addEventListener("DOMMouseScroll",GO);
-</script>
+							console.log('scrolling down');
+							if( 4*elemHeight+tolerance < $(window).scrollTop() && $(window).scrollTop() < elemHeight*5 ){
+								$("#scroll-screen-bottom a").attr('href','#screen2');
+								isAnimating = true;
+								$('html,body').animate({
+									scrollTop: $("#screen6").offset().top
+								},800,function(){
+									$("#scroll-screen-bottom").hide();
+									$("#scroll-screen-top").show();
+									$(this).stop(true,false);
+									isAnimating = false;
+								});
 
-</body>
+								return false;
+							}
+							else if( 3*elemHeight+tolerance < $(window).scrollTop() && $(window).scrollTop() < elemHeight*4 ){
 
+								$("#scroll-screen-bottom a").attr('href','#screen6');
+								isAnimating = true;
+
+								$('html,body').animate({
+									scrollTop: $("#screen5").offset().top
+								},800,function(){
+									$(this).stop(true,false);
+									isAnimating = false;
+
+								});
+								return false;
+							}
+							else if( 2*elemHeight+tolerance < $(window).scrollTop() && $(window).scrollTop() < elemHeight*3 ){
+								$("#scroll-screen-bottom a").attr('href','#screen5');
+								isAnimating = true;
+								$('html,body').animate({
+									scrollTop: $("#screen4").offset().top
+								},800,function(){
+									$(this).stop(true,false);
+									isAnimating = false;
+								});
+								return false;
+							}
+
+							else if( elemHeight+tolerance < $(window).scrollTop() && $(window).scrollTop() < elemHeight*2 ){
+
+								$("#scroll-screen-bottom a").attr('href','#screen4');
+								isAnimating = true;
+
+								$('html,body').animate({
+									scrollTop: $("#screen3").offset().top
+								},800,function(){
+									$(this).stop(true,false);
+									isAnimating = false;
+								});
+								return false;
+							}
+							else if( tolerance < $(window).scrollTop() && $(window).scrollTop() < elemHeight ){
+								isAnimating = true;
+
+								$("#scroll-screen-bottom a").attr('href','#screen3');
+								$('html,body').animate({
+									scrollTop: $("#screen2").offset().top
+								},800,function(){
+									$(this).stop(true,false);
+									isAnimating = false;
+									$("#scroll-screen-bottom").show();
+									$("#scroll-screen-top").hide();
+								});
+								return false;
+							}
+						}
+					}
+
+					lastScrollTop = $(window).scrollTop();
+
+					// This code is for handling the button flip
+					if($(window).scrollTop() + $(window).height() == $(document).height()) {
+						$("#scroll-screen-bottom").hide();
+						$("#scroll-screen-top").show();
+					}
+					
+				}
+
+				anim = false;
+				endofPage = false;
+
+				var lastScrollTop = 0,
+				st,
+				direction;
+
+				function detectDirection() {
+					st = window.pageYOffset;
+					if (st > lastScrollTop) {
+						direction = "down";
+					} else {
+						direction = "up";
+					}
+					lastScrollTop = st;
+					return  direction;
+				}
+
+				limit = $('.box').height();
+				number =  0;
+				screen = 2;
+
+				$('.container').on( 'mousewheel DOMMouseScroll touchmove', function (e) { 
+					e.preventDefault();
+					console.log('scrolling');
+					// $( ".text" ).css("opacity", "0");
+					if(!anim){
+						if(endofPage){
+							anim = true;
+							$(".logo a").click();
+						}
+						else{
+							console.log('starting anim');
+							anim = true;
+							// Incrementing here because the animation is run twice on html and body
+							screen++;
+							var e0 = e.originalEvent;
+							var delta = e0.wheelDelta || -e0.detail;
+							startScroll(e);
+						}
+					}
+					number++;
+				});
+
+				$("#scroll-screen-bottom a").on('click', function(event){
+					console.log('click');
+					if(!anim){
+						if(endofPage){
+							$(".logo a").click();
+						}
+						else{
+							screen++;
+							anim = true;
+							startScroll(event);
+						}
+					}
+				});
+
+				var startScroll = function(event){
+					event.preventDefault();
+					console.log(screen);
+					console.log(event);
+					elem = $("#scroll-screen-bottom a")[0];
+					if (elem.hash !== "") {
+						var hash = elem.hash;
+						console.log(hash);
+						prevScreen = screen-1;
+						time = 1000;
+						$('html,body').animate({
+							scrollTop: $(hash).offset().top
+						}, 800, function(){
+							lastScrollTop = $('html,body').scrollTop();
+							if(screen == 7){
+								console.log('reached the end');
+								$('html,body').stop(true,true);
+								$(elem).attr('href','#screen2');
+								$("#scroll-screen-bottom").hide();
+								$("#scroll-screen-top").show();
+								endofPage = true;
+								time = 1500;
+							}
+							else{
+								endofPage = false;
+							}
+							setTimeout(function(){
+								$( ".text" ).css("opacity", "1");
+								console.log('animation finished');
+								$("#scroll-screen-bottom a").attr('href','#screen'+screen);
+								anim = false;
+							}, time);
+						});
+					} 
+				}
+
+				$("#scroll-screen-top a,.logo a").on('click', function(event) {
+					console.log('end of page');
+					$("#scroll-screen-top").hide();
+					$("#scroll-screen-bottom").show();
+					if (this.hash !== "") {
+						event.preventDefault();
+						var hash = this.hash;
+						$('html,body').animate({
+							scrollTop: $(hash).offset().top
+						}, 800, function(){
+							setTimeout(function(args) {
+								screen = 2;
+								endofPage = false;
+								$("#scroll-screen-bottom a").attr('href','#screen2');
+								$(".text").css("opacity", "1");
+								anim = false;
+							},1000);
+						});
+					} 
+				});
+
+				// $(".logo a").on('click', function(event) {
+					
+				// 	$('html,body').stop(true,true);
+
+				// 	if (this.hash !== "") {
+
+				// 		event.preventDefault();
+				// 		$("#scroll-screen-top").hide();
+
+				// 		var hash = this.hash;
+
+				// 		$('html,body').animate({
+				// 			scrollTop: $(hash).offset().top
+				// 		}, 800, function(){
+				// 			$("#screen3,#screen4,#screen5,#screen6").hide();
+				// 			/*$("#scroll-screen-bottom a").attr('href','#screen2');
+				// 			screen = 2;*/
+				// 			$("#scroll-screen-bottom").show();
+				// 			anim = false;
+				// 		});
+
+				// 	} 
+				// });
+			});
+		</script>
+	</body>
 </html>

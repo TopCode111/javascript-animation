@@ -32,7 +32,7 @@ h1.text{
 	background: black;
 	font-size: 9vw;
 	vertical-align: middle;
-	padding-bottom: 15%;
+	padding-bottom: 20%;
 }
 
 .container {
@@ -61,16 +61,16 @@ div.box:before {
 
 .box {
 	height: 100%;
-	padding-right: 10%;
+	padding-right: 7%;
 	padding-left: 3%;
 	display: table;
 }
 .logo{
 	z-index: 10;
 	position: fixed;
-	margin-left: 4%;
-	margin-top: 7%;
-	font-size: 20px !important;
+	margin-left: 27px;
+	margin-top: 50px;
+	font-size: 20px;
 	font-family: 'NexaBold';
 }
 
@@ -90,7 +90,7 @@ div.scroll-screen {
 	position: fixed;
 	font-size: 5rem;
 	width: 100%;
-	/*bottom: 5px;*/
+	bottom: 5px;
 	text-align: center;
 }
 
@@ -108,14 +108,14 @@ a:hover,a:focus,a:active{
 	color:initial;
 }
 
-/*#debug{
+#debug{
 	position: fixed;
 	bottom:100px;
 	width: 100%;
 	color:white;
 	background: red;
 	padding: 10px;
-}*/
+}
 
 
 .hide{

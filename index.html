@@ -111,10 +111,10 @@
 		</div>
 	</div>
 	<div class="scroll-screen" id="scroll-screen-bottom">
-		<a href="#screen2"><span class="arrow">&darr;</span></a>
+		<a href="" style="cursor: not-allowed;"><span class="arrow">&darr;</span></a>
 	</div>
 	<div class="scroll-screen" id="scroll-screen-top">
-		<a href="#screen1"><span class="arrowu">&uarr;</span></a>
+		<a href="" style="cursor: not-allowed;"><span class="arrowu">&uarr;</span></a>
 	</div>
     <!--  <div id="debug"></div> -->
     <script>
@@ -132,7 +132,7 @@
     </script>
 		<script type="text/javascript">
 			$(document).ready(function(){
-				window.onscroll = function() {/*scrollFunction()*/};
+				window.onscroll = function() {startScroll();};
 				elemHeight = $('.box').height();
 				tolerance = elemHeight/20;
 				isAnimating = false;
@@ -271,7 +271,7 @@
 					number++;
 				});
 
-				$("#scroll-screen-bottom a").on('click', function(event){
+				/*$("#scroll-screen-bottom a").on('click', function(event){
 					console.log('click');
 					if(!anim){
 						if(endofPage){
@@ -283,30 +283,37 @@
 							startScroll(event);
 						}
 					}
-				});
-
+				});*/
+				log_flag = true;
 				var startScroll = function(event){
 					event.preventDefault();
 					console.log(screen);
 					console.log(event);
 					elem = $("#scroll-screen-bottom a")[0];
+					if(elem.hash==""){ elem.hash="screen2";}
+					if(log_flag==true) {
+						elem.hash="screen2";
+						log_flag = false;
+					}
+					//alert(elem.hash);
 					if (elem.hash !== "") {
 						var hash = elem.hash;
 						console.log(hash);
 						prevScreen = screen-1;
-						time = 1000;
+						time = 500;
 						$('html,body').animate({
 							scrollTop: $(hash).offset().top
 						}, 800, function(){
 							lastScrollTop = $('html,body').scrollTop();
+							if(screen==7){ screen=1;}
 							if(screen == 7){
 								console.log('reached the end');
-								$('html,body').stop(true,true);
-								$(elem).attr('href','#screen2');
+								//$('html,body').stop(true,true);
+								//$(elem).attr('href','#screen2');
 								$("#scroll-screen-bottom").hide();
 								$("#scroll-screen-top").show();
 								endofPage = true;
-								time = 1500;
+								time = 500;
 							}
 							else{
 								endofPage = false;
@@ -321,23 +328,29 @@
 					} 
 				}
 
-				$("#scroll-screen-top a,.logo a").on('click', function(event) {
+				$(".logo a").on('click', function(event) {
+					//alert(screen);
+					log_flag = true;
+					screen = 2;
 					console.log('end of page');
 					$("#scroll-screen-top").hide();
 					$("#scroll-screen-bottom").show();
 					if (this.hash !== "") {
 						event.preventDefault();
 						var hash = this.hash;
+						//alert(this.hash);
 						$('html,body').animate({
 							scrollTop: $(hash).offset().top
 						}, 800, function(){
 							setTimeout(function(args) {
-								screen = 2;
+								
 								endofPage = false;
-								$("#scroll-screen-bottom a").attr('href','#screen2');
+								//$("#scroll-screen-bottom a").attr('href','#screen2');
+								//$("#screen2").load()
+								//window.open("index.html");
 								$(".text").css("opacity", "1");
 								anim = false;
-							},1000);
+							},500);
 						});
 					} 
 				});

@@ -166,9 +166,9 @@
         window.onscroll = function(event) {
             //startScroll(event);
         };
-        elemHeight = $(".box").height();
-        tolerance = elemHeight / 20;
-        isAnimating = false;
+        var elemHeight = $(".box").height();
+        var tolerance = elemHeight / 20;
+        var isAnimating = false;
         var lastScrollTop = 0;
         $("#scroll-screen-bottom a").bind("click", function() {
             //scrollFunction() ;
@@ -256,8 +256,8 @@
 
         }
 
-        anim = false;
-        endofPage = false;
+        var anim = false;
+        var endofPage = false;
 
         var lastScrollTop = 0,
             st,
@@ -274,9 +274,9 @@
             return direction;
         }
 
-        limit = $(".box").height();
-        number = 0;
-        screen = 2;
+        var limit = $(".box").height();
+        var number = 0;
+        var screen = 2;
 
         $(".container").on("mousewheel DOMMouseScroll touchmove", function(e) {
             e.preventDefault();
@@ -343,7 +343,7 @@
                 }
             }
         });*/
-        log_flag = true;
+        var log_flag = true;
         var startScroll = function(event) {
 
             event.preventDefault();

@@ -34,6 +34,7 @@
         }
 
         .arrow, .arrowu {
+        	cursor: pointer;
             font-weight: bolder;
             color: white;
             white-space: nowrap;
@@ -59,6 +60,10 @@
         }
         .hitbox{
         	display: -webkit-inline-box;
+        }
+        #arrow_location{
+        	z-index: 22;
+
         }
     </style>
 </head>
@@ -111,10 +116,10 @@
 		</div>
 	</div>
 	<div class="scroll-screen" id="scroll-screen-bottom">
-		<a href="" style="cursor: not-allowed;"><span class="arrow">&darr;</span></a>
+		<a href=""></a><span class="arrow">&darr;</span>
 	</div>
 	<div class="scroll-screen" id="scroll-screen-top">
-		<a href="" style="cursor: not-allowed;"><span class="arrowu">&uarr;</span></a>
+		<a href=""></a><span class="arrowu">&uarr;</span>
 	</div>
     <!--  <div id="debug"></div> -->
     <script>
@@ -131,7 +136,14 @@
         setInterval(arrowBounce, 450);
     </script>
 		<script type="text/javascript">
+			
 			$(document).ready(function(){
+					//const arro=document.getElementByClassName("arrow");
+				/*const arro = $(".arrow");
+				function handle(event){
+					//console.log(event);//.preventDefault();
+				}
+				arro.addEventListener("click", handle);*/
 				window.onscroll = function() {startScroll();};
 				elemHeight = $('.box').height();
 				tolerance = elemHeight/20;
@@ -253,6 +265,7 @@
 					e.preventDefault();
 					console.log('scrolling');
 					// $( ".text" ).css("opacity", "0");
+					if( e.originalEvent.detail > 0 || e.originalEvent.wheelDelta < 0 ) {
 					if(!anim){
 						if(endofPage){
 							anim = true;
@@ -268,6 +281,34 @@
 							startScroll(e);
 						}
 					}
+					}
+					else{
+
+						state = "up";
+						//alert(state);
+						/*if((this.hash == "#screen5") && (state == "up") && (prevScreen == 1))
+						{
+							screen = 5;
+							prevScreen = 4;
+							this.hash = "#screen";
+						}*/
+						if(!anim){
+							if(endofPage){
+								anim = true;
+								$(".logo a").click();
+							}
+							else{
+								anim = true;
+								if(screen >= 2)
+									screen -= 1;
+								else if(screen < 2)
+									screen = 1;
+								var e0 = e.originalEvent;
+								var delta = e0.wheelDelta || -e0.detail;
+								startScroll(e);
+							}
+						}
+					}	
 					number++;
 				});
 
@@ -303,17 +344,23 @@
 						time = 500;
 						$('html,body').animate({
 							scrollTop: $(hash).offset().top
-						}, 800, function(){
+						}, 1200, function(){
+							
 							lastScrollTop = $('html,body').scrollTop();
-							if(screen==7){ screen=1;}
+							//if(screen==7){ }
 							if(screen == 7){
+								//alert(screen);
 								console.log('reached the end');
-								//$('html,body').stop(true,true);
+								$('html,body').stop(true,true);
 								//$(elem).attr('href','#screen2');
-								$("#scroll-screen-bottom").hide();
-								$("#scroll-screen-top").show();
+								//$("#scroll-screen-bottom").hide();
+								$("#scroll-screen-bottom").css("display","none");
+								$("#scroll-screen-top").css("display","block");
+								//$("#scroll-screen-top").show();
 								endofPage = true;
-								time = 500;
+								//screen=1;
+								time =50;
+
 							}
 							else{
 								endofPage = false;

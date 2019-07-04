@@ -14,9 +14,11 @@
 }
 
 body,html{
-	height: 100%;
+	/*overflow: hidden;
+	height: 100%;*/
 	}
 body{
+	overflow: hidden;
 	background: black;
 }
 #screen2 h1.text{
@@ -32,6 +34,7 @@ h1.text{
 	background: black;
 	font-size: 9vw;
 	vertical-align: middle;
+	padding-bottom: 10%;
 }
 
 .container {

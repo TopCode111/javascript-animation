@@ -14,7 +14,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
     <style>
         body, html {
-            /*height: 100%;*/
+            /*hight: 100%;*/
         }
 
         .d-flex {
@@ -56,7 +56,7 @@
             transition: all 900ms linear;
         }
 
-        /* this sets the position of the arrow when it's up, so it will move up or down by 14px when you add or remove this class */
+        /* this sets  position of the arrow when it's up, so it will move up or down by 14px when you add or remove this class */
         .lift {
             transform: translateY(5px);
         }
@@ -74,7 +74,7 @@
 <body>
 <header>
     <div class="logo">
-        <p><a href="#screen1">Danny Quick</a></p>
+        <p><a href="">Danny Quick</a></p>
     </div>
 </header>
 <div class="container">
@@ -135,7 +135,7 @@
     <a href=""></a><span class="arrow">&darr;</span>
 </div>
 <div class="scroll-screen" id="scroll-screen-top">
-    <a href=""></a><span class="arrowu">&uarr;</span>
+    <a href=""><span class="arrowu">&uarr;</span></a>
 </div>
 <!--  <div id="debug"></div> -->
 <script>
@@ -153,305 +153,130 @@
 </script>
 <script type="text/javascript">
 
+    function isMobileDevice() {
+        return (typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1);
+    };
+    var anim = false;
     $(document).ready(function() {
-        //startScroll();
-        //const arro=document.getElementByClassName("arrow");
-        /*const arro = $(".arrow");
-        function handle(event){
-            //console.log(event);//.preventDefault();
-        }
-        arro.addEventListener("click", handle);*/
-        var state = "";
-        var prevScreen = "1";
-        window.onscroll = function(event) {
-            //startScroll(event);
-        };
-        var elemHeight = $(".box").height();
-        var tolerance = elemHeight / 20;
-        var isAnimating = false;
-        var lastScrollTop = 0;
-        $("#scroll-screen-bottom a").bind("click", function() {
-            //scrollFunction() ;
-        });
+        
+        var startPage = 1;
+        var endPage = 6;
+        var screen = 1;
 
-        function scrollFunction() {
-            console.log("dimen" + $(window).scrollTop());
+        const DOWN = 1;
+        const UP = -1;
+        const FIRST = 0;
 
-            if (!isAnimating) {
-                if ($(window).scrollTop() > lastScrollTop) {
-
-                    console.log("scrolling down");
-                    if (4 * elemHeight + tolerance < $(window).scrollTop() && $(window).scrollTop() < elemHeight * 5) {
-                        $("#scroll-screen-bottom a").attr("href", "#screen2");
-                        isAnimating = true;
-                        $("html,body").animate({
-                            scrollTop: $("#screen6").offset().top,
-                        }, 800, function() {
-                            $("#scroll-screen-bottom").hide();
-                            $("#scroll-screen-top").show();
-                            $(this).stop(true, false);
-                            isAnimating = false;
-                        });
-
-                        return false;
-                    } else if (3 * elemHeight + tolerance < $(window).scrollTop() && $(window).scrollTop() < elemHeight * 4) {
-
-                        $("#scroll-screen-bottom a").attr("href", "#screen6");
-                        isAnimating = true;
-
-                        $("html,body").animate({
-                            scrollTop: $("#screen5").offset().top,
-                        }, 800, function() {
-                            $(this).stop(true, false);
-                            isAnimating = false;
-
-                        });
-                        return false;
-                    } else if (2 * elemHeight + tolerance < $(window).scrollTop() && $(window).scrollTop() < elemHeight * 3) {
-                        $("#scroll-screen-bottom a").attr("href", "#screen5");
-                        isAnimating = true;
-                        $("html,body").animate({
-                            scrollTop: $("#screen4").offset().top,
-                        }, 800, function() {
-                            $(this).stop(true, false);
-                            isAnimating = false;
-                        });
-                        return false;
-                    } else if (elemHeight + tolerance < $(window).scrollTop() && $(window).scrollTop() < elemHeight * 2) {
-
-                        $("#scroll-screen-bottom a").attr("href", "#screen4");
-                        isAnimating = true;
-
-                        $("html,body").animate({
-                            scrollTop: $("#screen3").offset().top,
-                        }, 800, function() {
-                            $(this).stop(true, false);
-                            isAnimating = false;
-                        });
-                        return false;
-                    } else if (tolerance < $(window).scrollTop() && $(window).scrollTop() < elemHeight) {
-                        isAnimating = true;
-
-                        $("#scroll-screen-bottom a").attr("href", "#screen3");
-                        $("html,body").animate({
-                            scrollTop: $("#screen2").offset().top,
-                        }, 800, function() {
-                            $(this).stop(true, false);
-                            isAnimating = false;
-                            $("#scroll-screen-bottom").show();
-                            $("#scroll-screen-top").hide();
-                        });
-                        return false;
-                    }
-                }
+        var updateArrow = function() {
+            if(screen === endPage){
+                $('html,body').stop(true,true);
+                $("#scroll-screen-bottom").css("display", "none");
+                $("#scroll-screen-top").css("display", "block");
+            }else{
+                $("#scroll-screen-bottom").css("display", "block");
+                $("#scroll-screen-top").css("display", "none");
             }
-
-            lastScrollTop = $(window).scrollTop();
-
-            // This code is for handling the button flip
-            if ($(window).scrollTop() + $(window).height() == $(document).height()) {
-                $("#scroll-screen-bottom").hide();
-                $("#scroll-screen-top").show();
-            }
-
         }
 
-        var anim = false;
-        var endofPage = false;
+        var updateScreen = function(direction) {
+            if (direction === DOWN && screen > startPage) {
+                screen -= 1;
+            } else if (direction === UP && screen < endPage) {
+                screen += 1;
+            } else if (direction == FIRST) {
+                screen = 1;
+            } else { return false; }
 
-        var lastScrollTop = 0,
-            st,
-            direction;
-
-        function detectDirection() {
-            st = window.pageYOffset;
-            if (st > lastScrollTop) {
-                direction = "down";
-            } else {
-                direction = "up";
-            }
-            lastScrollTop = st;
-            return direction;
+            return true;
         }
+        const time = 300;
+        var startScroll = function(direction) {
+            if (anim) return;
+            
+            if (!updateScreen(direction)) { return; }
 
-        var limit = $(".box").height();
-        var number = 0;
-        var screen = 2;
+            anim = true;
 
-        $(".container").on("mousewheel DOMMouseScroll touchmove", function(e) {
-            e.preventDefault();
-            console.log("scrolling");
-            // $( ".text" ).css("opacity", "0");
-            if (e.originalEvent.detail > 0 || e.originalEvent.wheelDelta < 0) {
-                state = "down";
-                if (!anim) {
-                    if (endofPage) {
-                        anim = true;
-                        $(".logo a").click();
-                    } else {
-                        console.log("starting anim");
-                        anim = true;
-                        // Incrementing here because the animation is run twice on html and body
-                        screen++;
-                        //alert("dowm"+screen);
-                        var e0 = e.originalEvent;
-                        var delta = e0.wheelDelta || -e0.detail;
-                        startScroll(e);
-                    }
-                }
-            } else {
-
-                state = "up";
-
-                /*if((this.hash == "#screen5") && (state == "up") && (prevScreen == 1))
-                {
-                    screen = 5;
-                    prevScreen = 4;
-                    this.hash = "#screen";
-                }*/
-                if (!anim) {
-                    if (endofPage) {
-                        anim = true;
-                        $(".logo a").click();
-                    } else {
-
-                        anim = true;
-                        if (screen >= 2)
-                            screen -= 1;
-                        else if (screen < 2)
-                            screen = 1;
-                        //alert(state+screen);
-                        var e0 = e.originalEvent;
-                        var delta = e0.wheelDelta || -e0.detail;
-                        startScroll(e);
-                    }
-                }
-            }
-            //number++;
-        });
-
-        /*$("#scroll-screen-bottom a").on('click', function(event){
-            console.log('click');
-            if(!anim){
-                if(endofPage){
-                    $(".logo a").click();
-                }
-                else{
-                    screen++;
-                    anim = true;
-                    startScroll(event);
-                }
-            }
-        });*/
-        var log_flag = true;
-        var startScroll = function(event) {
-
-            event.preventDefault();
-            console.log(screen);
-            console.log(event);
-            elem = $("#scroll-screen-bottom a")[0];
-            if (elem.hash == "") {
-                elem.hash = "screen2";
-            }
-            if (log_flag == true) {
-                elem.hash = "screen2";
-                log_flag = false;
-            }
-            //alert(elem.hash);
-            if (state == "down")
-                elem.hash = elem.hash;
-            else
-                elem.hash = "#screen" + prevScreen;
-            if (elem.hash !== "") {
-                var hash = elem.hash;
-                console.log(hash);
-                prevScreen = screen - 2;
-                if (prevScreen < 1)
-                    prevScreen = 1;
-                time = 50;
-                $("html,body").animate({
-                    scrollTop: $(hash).offset().top,
-                }, 1000, function() {
-
-                    lastScrollTop = $("html,body").scrollTop();
-                    //if(screen==7){ }
-                    if (screen == 7) {
-                        //alert(screen);
-                        console.log("reached the end");
-                        $("html,body").stop(true, true);
-                        //$(elem).attr('href','#screen2');
-                        //$("#scroll-screen-bottom").hide();
-                        $("#scroll-screen-bottom").css("display", "none");
-                        $("#scroll-screen-top").css("display", "block");
-                        //$("#scroll-screen-top").show();
-                        endofPage = true;
-                        //screen=1;
-                        time = 50;
-
-                    } else {
-                        endofPage = false;
-                    }
-                    //alert(screen);
-                    setTimeout(function() {
-                        $(".text").css("opacity", "1");
-                        console.log("animation finished");
-                        $("#scroll-screen-bottom a").attr("href", "#screen" + screen);
-                        anim = false;
-                    }, time);
-                });
-            }
+            const hash = "#screen" + screen;
+            $('html,body').stop(true,true);
+            $("html,body").animate({
+                scrollTop: $(hash).offset().top,
+            }, 800, function() {
+                updateArrow();
+                setTimeout(function(){
+                    anim = false;
+                }, time);
+                
+            });
         };
 
-        $(".logo a").on("click", function(event) {
-            //alert(screen);
-            log_flag = true;
-            screen = 2;
-            console.log("end of page");
-            $("#scroll-screen-top").hide();
-            $("#scroll-screen-bottom").show();
-            if (this.hash !== "") {
+        if (isMobileDevice()) {
+            console.log("This is mobile device");
+            var firstTouchY = 0;
+            const delta = 20;
+            function getDirection(e) {
+                if (firstTouchY > 0) {
+                    const dy = firstTouchY - e.originalEvent.layerY
+                    if (Math.abs(dy) > delta) {
+                        if (dy > 0) {
+                            return 1;
+                        }
+                        else if (dy < 0) {
+                            return -1;
+                        }
+                    }
+                }
+                return 0;
+            }
+            $(".container").on("touchstart", function(e) {
+                //event.preventDefault();
+                firstTouchY = e.originalEvent.layerY;
+            });
+            $(".container").on("touchend touchcancel", function(e) {
+                //event.preventDefault();
+                firstTouchY = 0;
+            });
+            $(".container").on("touchmove", function(e) {
+               event.preventDefault();
+                if (firstTouchY === 0 || anim) {
+                    return;
+                }
+
+                const direction = getDirection(e);
+                if (direction === 1 && screen < endPage) {
+                    startScroll(UP);
+                   
+                }
+                else if (direction === -1 && screen > startPage) {
+                    startScroll(DOWN);   
+                }
+                else if(direction === 1 && screen === 6){
+                    startScroll(FIRST); 
+                }
+            });
+            
+        } else {
+            $(".container").on("mousewheel DOMMouseScroll", function(e) {
                 event.preventDefault();
-                var hash = this.hash;
-                //alert(this.hash);
-                $("html ,body").animate({
-                    scrollTop: $(hash).offset().top,
-                }, 800, function() {
-                    setTimeout(function(args) {
-
-                        endofPage = false;
-                        //$("#scroll-screen-bottom a").attr('href','#screen2');
-                        //$("#screen2").load()
-                        //window.open("index.html");
-                        $(".text").css("opacity", "1");
-                        anim = false;
-                    }, 500);
-                });
-            }
+                
+                if (!anim) {
+                    if (e.originalEvent.detail > 0 || e.originalEvent.wheelDelta < 0) {
+                        if (screen < endPage) {
+                            startScroll(UP);
+                        } else {
+                            startScroll(FIRST);
+                        }
+                    } else if (e.originalEvent.detail < 0 || e.originalEvent.wheelDelta > 0) {
+                        startScroll(DOWN);
+                    }
+                }
+            });
+        }
+        
+        $(".logo a, scroll-screen-top a").on("click", function(event) {
+            event.preventDefault();
+            startScroll(FIRST);
         });
-
-        // $(".logo a").on('click', function(event) {
-
-        // 	$('html,body').stop(true,true);
-
-        // 	if (this.hash !== "") {
-
-        // 		event.preventDefault();
-        // 		$("#scroll-screen-top").hide();
-
-        // 		var hash = this.hash;
-
-        // 		$('html,body').animate({
-        // 			scrollTop: $(hash).offset().top
-        // 		}, 800, function(){
-        // 			$("#screen3,#screen4,#screen5,#screen6").hide();
-        // 			/*$("#scroll-screen-bottom a").attr('href','#screen2');
-        // 			screen = 2;*/
-        // 			$("#scroll-screen-bottom").show();
-        // 			anim = false;
-        // 		});
-
-        // 	}
-        // });
     });
 </script>
 </body>
